@@ -1,0 +1,13 @@
+<ul class="side-list">
+    {% for item in directions %}
+        <li class="{% if item.slug == selected_slug %}selected{% endif %}">
+            {% if item.slug == selected_slug %}
+                <span>{{ item.title }}</span>
+            {% else %}
+                <a href="{% url 'direction' item.slug %}">{{ item.title }}</a>
+            {% endif %}
+        </li>
+    {% empty %}
+        <li><span>Направления пока отсутствуют.</span></li>
+    {% endfor %}
+</ul>

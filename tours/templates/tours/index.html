@@ -1,0 +1,80 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<div class="content-header">
+    <div>
+        <h1>{{ company_name }}</h1>
+        <p class="lead">{{ description }}</p>
+    </div>
+</div>
+
+<div class="stats-row">
+    <div class="mini-stat">
+        <span class="mini-stat-label">Направлений</span>
+        <strong>{{ directions|length }}</strong>
+    </div>
+    <div class="mini-stat">
+        <span class="mini-stat-label">Найдено туров</span>
+        <strong>{{ tours|length }}</strong>
+    </div>
+</div>
+
+<div class="page-card filter-panel">
+    <h2 class="section-title">Фильтрация и сортировка туров</h2>
+
+    <form method="get" class="filter-form">
+        <div class="form-group">
+            <label for="direction">Направление</label>
+            <select name="direction" id="direction" class="form-select">
+                <option value="" {% if not selected_direction %}selected{% endif %}>Все направления</option>
+                <option value="city" {% if selected_direction == 'city' %}selected{% endif %}>Городские экскурсии</option>
+                <option value="siberia" {% if selected_direction == 'siberia' %}selected{% endif %}>Туры по Сибири</option>
+                <option value="weekend" {% if selected_direction == 'weekend' %}selected{% endif %}>Туры выходного дня</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="sort">Сортировка</label>
+            <select name="sort" id="sort" class="form-select">
+                <option value="new" {% if selected_sort == 'new' %}selected{% endif %}>Сначала новые</option>
+                <option value="old" {% if selected_sort == 'old' %}selected{% endif %}>Сначала старые</option>
+                <option value="title" {% if selected_sort == 'title' %}selected{% endif %}>По названию</option>
+            </select>
+        </div>
+
+        <div class="filter-actions">
+            <button type="submit" class="btn btn-primary">Применить</button>
+            <a href="{% url 'home' %}" class="btn btn-light">Сбросить</a>
+        </div>
+    </form>
+</div>
+
+<h2 class="section-title">Туры из базы данных</h2>
+
+<div class="tour-grid">
+    {% for item in tours %}
+        <article class="tour-item-card">
+            <div class="tour-item-top">
+                <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+                <span class="badge">{{ item.get_is_published_display }}</span>
+            </div>
+
+            <p class="tour-item-text">{{ item.description|truncatewords:12 }}</p>
+
+            <div class="tour-meta-list">
+                <span>⏱ {{ item.duration }}</span>
+                <span>📍 {{ item.get_direction_title }}</span>
+                <span>💳 {{ item.price }}</span>
+            </div>
+
+            <div class="card-actions">
+                <a href="{{ item.get_absolute_url }}" class="btn btn-secondary">Открыть</a>
+            </div>
+        </article>
+    {% empty %}
+        <div class="page-card empty-state">
+            По выбранным параметрам туры не найдены.
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

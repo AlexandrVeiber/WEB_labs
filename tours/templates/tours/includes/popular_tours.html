@@ -1,0 +1,9 @@
+<ul class="side-list">
+    {% for item in tours %}
+        <li>
+            <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+        </li>
+    {% empty %}
+        <li><span>Популярные туры пока отсутствуют.</span></li>
+    {% endfor %}
+</ul>

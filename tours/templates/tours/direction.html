@@ -1,0 +1,43 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<div class="content-header">
+    <div>
+        <h1>{{ direction_name }}</h1>
+        <p class="lead">Подборка туров по выбранному направлению.</p>
+    </div>
+</div>
+
+<div class="stats-row">
+    <div class="mini-stat">
+        <span class="mini-stat-label">Количество туров</span>
+        <strong>{{ tours|length }}</strong>
+    </div>
+</div>
+
+<div class="tour-grid">
+    {% for item in tours %}
+        <article class="tour-item-card">
+            <div class="tour-item-top">
+                <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+                <span class="badge">{{ item.get_is_published_display }}</span>
+            </div>
+
+            <p class="tour-item-text">{{ item.description|truncatewords:12 }}</p>
+
+            <div class="tour-meta-list">
+                <span>⏱ {{ item.duration }}</span>
+                <span>💳 {{ item.price }}</span>
+            </div>
+
+            <div class="card-actions">
+                <a href="{{ item.get_absolute_url }}" class="btn btn-secondary">Открыть</a>
+            </div>
+        </article>
+    {% empty %}
+        <div class="page-card empty-state">
+            Для этого направления туры пока отсутствуют.
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

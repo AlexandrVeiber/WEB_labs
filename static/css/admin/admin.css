@@ -1,0 +1,321 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-soft: #3b82f6;
+    --success: #16a34a;
+    --bg-main: #0b1020;
+    --bg-card: #111827;
+    --bg-card-soft: #1f2937;
+    --border: #334155;
+    --text-main: #f8fafc;
+    --text-soft: #cbd5e1;
+    --link: #60a5fa;
+}
+
+/* Общая база */
+body,
+#container,
+#content,
+#content-main,
+#content-related,
+.module,
+.results,
+.dashboard #content {
+    font-size: 15px !important;
+}
+
+body {
+    background: var(--bg-main) !important;
+    color: var(--text-main) !important;
+    line-height: 1.5;
+}
+
+/* Шапка */
+#header {
+    background: linear-gradient(90deg, #1e3a8a, #2563eb) !important;
+    color: #fff !important;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    padding: 0 26px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.35);
+}
+
+#branding {
+    display: flex;
+    align-items: center;
+}
+
+#branding h1,
+#branding h1 a:link,
+#branding h1 a:visited,
+#site-name a:link,
+#site-name a:visited {
+    color: #ffffff !important;
+    font-size: 28px !important;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+#user-tools,
+#user-tools a,
+#user-tools a:link,
+#user-tools a:visited {
+    color: #eef2ff !important;
+    font-size: 13px !important;
+    font-weight: 600;
+}
+
+/* Хлебные крошки */
+div.breadcrumbs {
+    background: #274fcf !important;
+    color: #ffffff !important;
+    padding: 12px 30px !important;
+    font-size: 14px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+div.breadcrumbs a {
+    color: #dbeafe !important;
+    text-decoration: none;
+}
+
+/* Контент */
+#content {
+    padding: 26px 28px !important;
+}
+
+#content h1 {
+    font-size: 22px !important;
+    font-weight: 700;
+    margin-bottom: 20px !important;
+    color: #ffffff !important;
+}
+
+/* Заголовки блоков */
+.module h2,
+.module caption,
+.inline-group h2 {
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark)) !important;
+    color: #ffffff !important;
+    font-size: 17px !important;
+    font-weight: 700;
+    padding: 12px 16px !important;
+}
+
+/* Карточки/блоки */
+.module,
+#content-related {
+    background: rgba(17, 24, 39, 0.96) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+}
+
+.dashboard .module {
+    margin-bottom: 24px !important;
+}
+
+/* Левая колонка на страницах списков */
+#changelist-filter {
+    background: rgba(17, 24, 39, 0.96) !important;
+    border-left: 1px solid var(--border) !important;
+    padding-top: 0 !important;
+}
+
+#changelist-filter h2 {
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark)) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+}
+
+#changelist-filter h3 {
+    font-size: 15px !important;
+    color: #ffffff !important;
+    margin-top: 14px !important;
+}
+
+#changelist-filter li,
+#changelist-filter a {
+    font-size: 15px !important;
+    line-height: 1.6;
+}
+
+/* Таблицы */
+#result_list,
+.results table,
+table {
+    width: 100%;
+    border-collapse: collapse !important;
+    font-size: 15px !important;
+}
+
+#result_list thead th,
+.results thead th,
+thead th {
+    background: #1f2937 !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 12px 10px !important;
+    border-bottom: 1px solid var(--border) !important;
+    vertical-align: middle !important;
+}
+
+#result_list tbody tr,
+.results tbody tr {
+    background: transparent !important;
+}
+
+#result_list tbody td,
+#result_list tbody th,
+.results tbody td,
+.results tbody th {
+    padding: 12px 10px !important;
+    vertical-align: middle !important;
+    font-size: 15px !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+}
+
+#result_list tbody tr:nth-child(even),
+.results tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Ссылки */
+a:link,
+a:visited {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #93c5fd;
+}
+
+/* Формы и поля */
+input,
+textarea,
+select {
+    font-size: 15px !important;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=number],
+textarea,
+select {
+    border-radius: 8px !important;
+    border: 1px solid #475569 !important;
+    background: #0f172a !important;
+    color: #ffffff !important;
+    padding: 8px 10px !important;
+}
+
+textarea {
+    min-height: 140px;
+}
+
+/* Кнопки */
+.button,
+input[type=submit],
+input[type=button],
+.submit-row input,
+a.button {
+    background: var(--primary) !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    border: none !important;
+    padding: 10px 18px !important;
+    font-size: 15px !important;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+}
+
+.button:hover,
+input[type=submit]:hover,
+input[type=button]:hover,
+.submit-row input:hover,
+a.button:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-1px);
+}
+
+/* Кнопка Добавить */
+.object-tools a:link,
+.object-tools a:visited {
+    background: var(--success) !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+.object-tools a:hover {
+    background: #15803d !important;
+}
+
+/* Блок последних действий */
+#content-related .module h2 {
+    font-size: 17px !important;
+}
+
+#content-related .module {
+    border-radius: 14px !important;
+}
+
+/* Сообщения */
+.messagelist li {
+    border-radius: 10px;
+    font-size: 15px !important;
+    font-weight: 600;
+    padding: 12px 14px !important;
+}
+
+/* Пагинация */
+.paginator {
+    font-size: 15px !important;
+    padding: 14px 0 !important;
+}
+
+.paginator a,
+.paginator .this-page {
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+}
+
+/* Формы редактирования */
+.aligned label {
+    font-size: 15px !important;
+    font-weight: 600;
+    color: #ffffff !important;
+}
+
+.form-row {
+    padding: 12px 0 !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+}
+
+/* Горизонтальный выбор many-to-many */
+.selector h2 {
+    font-size: 15px !important;
+}
+
+.selector select {
+    min-height: 220px !important;
+}
+
+/* Немного аккуратнее боковое меню */
+#nav-sidebar {
+    font-size: 15px !important;
+}
+
+#nav-sidebar .current-model {
+    border-radius: 8px;
+}

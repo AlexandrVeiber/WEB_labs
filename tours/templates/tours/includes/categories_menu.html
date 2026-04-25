@@ -1,0 +1,13 @@
+<ul class="side-list">
+    {% for cat in categories %}
+        <li class="{% if cat.id == cat_selected %}selected{% endif %}">
+            {% if cat.id == cat_selected %}
+                <span>{{ cat.name }}</span>
+            {% else %}
+                <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+            {% endif %}
+        </li>
+    {% empty %}
+        <li><span>Категории пока отсутствуют.</span></li>
+    {% endfor %}
+</ul>

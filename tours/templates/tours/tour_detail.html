@@ -1,0 +1,83 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<div class="page-card detail-page-card">
+    <div class="content-header">
+        <div>
+            <h1>{{ tour.title }}</h1>
+            <p class="lead">Детальная информация о выбранном туре.</p>
+        </div>
+    </div>
+
+    <div class="detail-grid">
+        <div class="detail-item">
+            <span class="detail-label">Slug тура</span>
+            <strong>{{ tour_slug }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Категория</span>
+            <strong>
+                <a href="{{ tour.cat.get_absolute_url }}">{{ tour.cat.name }}</a>
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Направление</span>
+            <strong>{{ tour.get_direction_title }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Продолжительность</span>
+            <strong>{{ tour.duration }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Стоимость</span>
+            <strong>{{ tour.price }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Статус публикации</span>
+            <strong>{{ tour.get_is_published_display }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Транспорт</span>
+            <strong>{{ tour.info.transport }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Проживание</span>
+            <strong>{{ tour.info.accommodation }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Свободных мест</span>
+            <strong>{{ tour.info.places_count }}</strong>
+        </div>
+    </div>
+
+    {% with tour.tags.all as tags %}
+        {% if tags %}
+            <div class="detail-text-block">
+                <h3>Теги</h3>
+                <p>
+                    {% for tag in tags %}
+                        <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="detail-text-block">
+        <h3>Описание тура</h3>
+        <p>{{ tour.description }}</p>
+    </div>
+
+    <div class="card-actions">
+        <a href="{% url 'home' %}" class="btn btn-secondary">На главную</a>
+    </div>
+</div>
+{% endblock %}

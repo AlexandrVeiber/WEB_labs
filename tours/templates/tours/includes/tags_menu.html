@@ -1,0 +1,9 @@
+<ul class="side-list">
+    {% for tag in tags %}
+        <li>
+            <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
+        </li>
+    {% empty %}
+        <li><span>Теги пока отсутствуют.</span></li>
+    {% endfor %}
+</ul>

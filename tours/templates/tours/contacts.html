@@ -1,0 +1,12 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<h1>Контактная информация</h1>
+
+<p><strong>Адрес:</strong> {{ contact_data.address }}</p>
+<p><strong>Телефон:</strong> {{ contact_data.phone }}</p>
+<p><strong>Email:</strong> {{ contact_data.email }}</p>
+<p><strong>Режим работы:</strong> {{ contact_data.schedule }}</p>
+
+<p>Вы можете связаться с нами для подбора тура, записи на экскурсию и получения дополнительной информации.</p>
+{% endblock %}

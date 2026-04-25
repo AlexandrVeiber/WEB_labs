@@ -1,0 +1,62 @@
+{% load static %}
+{% load tours_tags %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'tours/css/styles.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <img src="{% static 'tours/images/logo.png' %}" alt="Логотип" class="brand-logo">
+                <div class="brand-text">
+                    <h1>Новосибирск-Тур</h1>
+                    <p>Туры и экскурсии по Новосибирску и Сибири</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-inner">
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'contacts' %}">Контакты</a>
+            <a href="{% url 'prices' %}">Цены</a>
+        </div>
+    </nav>
+
+    <main class="page-wrap">
+        <div class="layout">
+            <aside class="sidebar">
+    <div class="side-card categories-menu">
+        <h3>Категории</h3>
+        {% show_categories cat_selected %}
+    </div>
+
+    <div class="side-card tags-menu">
+        <h3>Теги</h3>
+        {% show_all_tags %}
+    </div>
+
+    <div class="side-card popular-services">
+        <h3>Популярные туры</h3>
+        {% show_popular_tours 3 %}
+    </div>
+</aside>
+
+            <section class="main-block">
+                {% block content %}{% endblock %}
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 Турагентство «Новосибирск-Тур»</p>
+    </footer>
+</body>
+</html>

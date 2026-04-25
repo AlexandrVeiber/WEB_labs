@@ -1,0 +1,20 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<h1>Стоимость услуг</h1>
+
+<table>
+    <tr>
+        <th>Услуга</th>
+        <th>Стоимость</th>
+    </tr>
+    {% for item in services %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p>Для групповых и индивидуальных туров стоимость может уточняться отдельно.</p>
+{% endblock %}
