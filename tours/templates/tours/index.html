@@ -54,6 +54,12 @@
 <div class="tour-grid">
     {% for item in tours %}
         <article class="tour-item-card">
+            {% if item.photo %}
+                <div class="tour-photo-wrap">
+                    <img src="{{ item.photo.url }}" alt="{{ item.title }}" class="tour-photo">
+                </div>
+            {% endif %}
+
             <div class="tour-item-top">
                 <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
                 <span class="badge">{{ item.get_is_published_display }}</span>

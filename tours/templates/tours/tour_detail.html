@@ -9,6 +9,12 @@
         </div>
     </div>
 
+    {% if tour.photo %}
+        <div class="detail-photo-wrap">
+            <img src="{{ tour.photo.url }}" alt="{{ tour.title }}" class="detail-photo">
+        </div>
+    {% endif %}
+
     <div class="detail-grid">
         <div class="detail-item">
             <span class="detail-label">Slug тура</span>

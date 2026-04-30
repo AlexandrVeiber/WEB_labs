@@ -1,4 +1,5 @@
 from django.contrib import admin, messages
+from django.utils.safestring import mark_safe
 
 from .models import Tour, Category, TagPost, TourInfo
 
@@ -29,6 +30,7 @@ class TourAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'title',
+        'tour_photo',
         'cat',
         'price',
         'time_create',
@@ -48,6 +50,8 @@ class TourAdmin(admin.ModelAdmin):
         'title',
         'slug',
         'description',
+        'photo',
+        'tour_photo',
         'duration',
         'price',
         'direction',
@@ -55,8 +59,17 @@ class TourAdmin(admin.ModelAdmin):
         'tags',
         'is_published',
     )
+    readonly_fields = ('tour_photo',)
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ('tags',)
+
+    @admin.display(description='Фото')
+    def tour_photo(self, tour):
+        if tour.photo:
+            return mark_safe(
+                f"<img src='{tour.photo.url}' width='70' style='border-radius: 8px;'>"
+            )
+        return 'Без фото'
 
     @admin.display(description='Краткое описание')
     def brief_description(self, tour):

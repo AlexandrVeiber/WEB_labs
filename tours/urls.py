@@ -10,4 +10,8 @@ urlpatterns = [
     path('contacts/', views.contacts, name='contacts'),
     path('prices/', views.prices, name='prices'),
     path('archive/<int:year>/', views.archive, name='archive'),
+
+    path('add-form/', views.add_tour_form, name='add_tour_form'),
+    path('add-model-form/', views.add_tour_model_form, name='add_tour_model_form'),
+    path('upload/', views.upload_file, name='upload_file'),
 ]

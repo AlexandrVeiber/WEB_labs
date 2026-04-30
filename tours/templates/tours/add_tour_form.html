@@ -1,0 +1,39 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<div class="page-card form-page-card">
+    <h1>{{ title }}</h1>
+
+    <p class="lead">
+        Форма создана с помощью класса forms.Form и не связана напрямую с моделью.
+    </p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="field-error">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="field-help">{{ field.help_text }}</div>
+                {% endif %}
+
+                {% if field.errors %}
+                    <div class="field-error">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="card-actions">
+            <button type="submit" class="btn btn-primary">Добавить тур</button>
+            <a href="{% url 'home' %}" class="btn btn-light">На главную</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

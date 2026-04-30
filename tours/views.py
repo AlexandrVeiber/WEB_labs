@@ -1,7 +1,12 @@
+import uuid
+from pathlib import Path
+
+from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Tour, Category, TagPost
+from .forms import AddTourForm, AddTourModelForm, UploadFileForm
+from .models import Tour, Category, TagPost, TourInfo
 
 
 DIRECTIONS = [
@@ -178,6 +183,97 @@ def archive(request, year):
     }
 
     return render(request, 'tours/archive.html', context=context)
+
+
+def add_tour_form(request):
+    if request.method == 'POST':
+        form = AddTourForm(request.POST)
+
+        if form.is_valid():
+            tags = form.cleaned_data.pop('tags')
+
+            tour = Tour.objects.create(**form.cleaned_data)
+            tour.tags.set(tags)
+
+            TourInfo.objects.get_or_create(tour=tour)
+
+            return redirect('home')
+    else:
+        form = AddTourForm()
+
+    context = {
+        'title': 'Добавление тура через обычную форму',
+        'form': form,
+        'current_direction': None,
+        'cat_selected': None,
+    }
+
+    return render(request, 'tours/add_tour_form.html', context=context)
+
+
+def add_tour_model_form(request):
+    if request.method == 'POST':
+        form = AddTourModelForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            tour = form.save()
+
+            TourInfo.objects.get_or_create(tour=tour)
+
+            return redirect('home')
+    else:
+        form = AddTourModelForm()
+
+    context = {
+        'title': 'Добавление тура через ModelForm',
+        'form': form,
+        'current_direction': None,
+        'cat_selected': None,
+    }
+
+    return render(request, 'tours/add_tour_model_form.html', context=context)
+
+
+def handle_uploaded_file(uploaded_file):
+    upload_dir = settings.BASE_DIR / 'uploads'
+    upload_dir.mkdir(exist_ok=True)
+
+    original_name = Path(uploaded_file.name)
+    file_name = original_name.stem
+    file_ext = original_name.suffix
+    random_suffix = uuid.uuid4().hex
+
+    new_file_name = f'{file_name}_{random_suffix}{file_ext}'
+    file_path = upload_dir / new_file_name
+
+    with open(file_path, 'wb+') as destination:
+        for chunk in uploaded_file.chunks():
+            destination.write(chunk)
+
+    return new_file_name
+
+
+def upload_file(request):
+    success_message = None
+
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            saved_file_name = handle_uploaded_file(form.cleaned_data['file'])
+            success_message = f'Файл успешно загружен: {saved_file_name}'
+    else:
+        form = UploadFileForm()
+
+    context = {
+        'title': 'Загрузка файла',
+        'form': form,
+        'success_message': success_message,
+        'current_direction': None,
+        'cat_selected': None,
+    }
+
+    return render(request, 'tours/upload_file.html', context=context)
 
 
 def page_not_found(request, exception):
