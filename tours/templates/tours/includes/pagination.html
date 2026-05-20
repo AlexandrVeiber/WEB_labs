@@ -1,0 +1,27 @@
+{% if page_obj.has_other_pages %}
+<nav class="pagination-wrapper">
+    <ul class="list-pages">
+        {% if page_obj.has_previous %}
+            <li class="page-num">
+                <a href="?{% if selected_direction %}direction={{ selected_direction }}&{% endif %}{% if selected_sort %}sort={{ selected_sort }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
+            </li>
+        {% endif %}
+
+        {% for p in paginator.page_range %}
+            {% if page_obj.number == p %}
+                <li class="page-num page-num-selected">{{ p }}</li>
+            {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                <li class="page-num">
+                    <a href="?{% if selected_direction %}direction={{ selected_direction }}&{% endif %}{% if selected_sort %}sort={{ selected_sort }}&{% endif %}page={{ p }}">{{ p }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="page-num">
+                <a href="?{% if selected_direction %}direction={{ selected_direction }}&{% endif %}{% if selected_sort %}sort={{ selected_sort }}&{% endif %}page={{ page_obj.next_page_number }}">&gt;</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}

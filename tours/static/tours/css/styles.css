@@ -685,3 +685,46 @@ textarea.form-control {
     max-height: 420px !important;
     object-fit: cover !important;
 }
+
+/* ===== Pagination styles ===== */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center; /* центрируем навигацию */
+    margin: 30px 0;
+}
+
+.list-pages {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-num a,
+.page-num-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-weight: 700;
+    box-shadow: 0 6px 12px rgba(15, 23, 42, 0.08);
+    transition: 0.2s ease;
+}
+
+.page-num a:hover {
+    background: #eef4ff;
+    transform: translateY(-2px);
+}
+
+.page-num-selected {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}

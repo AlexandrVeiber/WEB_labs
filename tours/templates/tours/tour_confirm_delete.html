@@ -1,0 +1,21 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<div class="page-card confirm-page-card">
+    <h1>{{ title }}</h1>
+
+    <p>
+        Вы действительно хотите удалить тур
+        <strong>{{ tour.title }}</strong>?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="card-actions">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a href="{{ tour.get_absolute_url }}" class="btn btn-light">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
