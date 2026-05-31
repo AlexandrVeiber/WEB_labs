@@ -2,6 +2,7 @@ import uuid
 from pathlib import Path
 
 from django.conf import settings
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -209,7 +210,9 @@ class ArchiveView(DataMixin, TemplateView):
         )
 
 
-class AddTourFormView(DataMixin, FormView):
+class AddTourFormView(PermissionRequiredMixin, DataMixin, FormView):
+    permission_required = 'tours.add_tour'
+
     form_class = AddTourForm
     template_name = 'tours/add_tour_form.html'
     success_url = reverse_lazy('home')
@@ -227,7 +230,9 @@ class AddTourFormView(DataMixin, FormView):
         return super().form_valid(form)
 
 
-class AddTourModelFormView(DataMixin, CreateView):
+class AddTourModelFormView(PermissionRequiredMixin, DataMixin, CreateView):
+    permission_required = 'tours.add_tour'
+
     form_class = AddTourModelForm
     template_name = 'tours/add_tour_model_form.html'
     success_url = reverse_lazy('home')
@@ -241,7 +246,9 @@ class AddTourModelFormView(DataMixin, CreateView):
         return response
 
 
-class UpdateTourView(DataMixin, UpdateView):
+class UpdateTourView(PermissionRequiredMixin, DataMixin, UpdateView):
+    permission_required = 'tours.change_tour'
+
     model = Tour
     form_class = AddTourModelForm
     template_name = 'tours/add_tour_model_form.html'
@@ -250,14 +257,15 @@ class UpdateTourView(DataMixin, UpdateView):
     title_page = 'Редактирование тура'
 
 
-class DeleteTourView(DataMixin, DeleteView):
+class DeleteTourView(PermissionRequiredMixin, DataMixin, DeleteView):
+    permission_required = 'tours.delete_tour'
+
     model = Tour
     template_name = 'tours/tour_confirm_delete.html'
     context_object_name = 'tour'
     success_url = reverse_lazy('home')
     slug_url_kwarg = 'tour_slug'
     title_page = 'Удаление тура'
-
 
 def handle_uploaded_file(uploaded_file):
     upload_dir = settings.BASE_DIR / 'uploads'

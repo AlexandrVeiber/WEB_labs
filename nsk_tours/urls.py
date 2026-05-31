@@ -11,6 +11,7 @@ admin.site.site_title = 'Админ-панель Новосибирск-Тур'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tours.urls')),
+    path('users/', include('users.urls', namespace='users')),
 ]
 
 if settings.DEBUG:

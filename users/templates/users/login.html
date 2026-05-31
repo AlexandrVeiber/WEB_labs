@@ -1,0 +1,37 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<div class="page-card form-page-card">
+    <h1>{{ title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="hidden" name="next" value="{{ next }}">
+
+        {% if form.non_field_errors %}
+            <div class="field-error">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+
+                {% if field.errors %}
+                    <div class="field-error">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="card-actions">
+            <button type="submit" class="btn btn-primary">Войти</button>
+            <a href="{% url 'users:register' %}" class="btn btn-light">Регистрация</a>
+        </div>
+
+        <p style="margin-top: 16px;">
+            <a href="{% url 'users:password_reset' %}">Забыли пароль?</a>
+        </p>
+    </form>
+</div>
+{% endblock %}

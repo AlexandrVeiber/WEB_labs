@@ -27,6 +27,14 @@
             <a href="{% url 'home' %}">Главная</a>
             <a href="{% url 'contacts' %}">Контакты</a>
             <a href="{% url 'prices' %}">Цены</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'users:profile' %}" class="nav-user">{{ user.username }}</a>
+                <a href="{% url 'users:logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'users:login' %}">Войти</a>
+                <a href="{% url 'users:register' %}">Регистрация</a>
+            {% endif %}
         </div>
     </nav>
 
